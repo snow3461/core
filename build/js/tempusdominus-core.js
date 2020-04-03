@@ -455,7 +455,7 @@ var DateTimePicker = function ($, moment) {
         DateTimePicker.prototype._change = function _change(e) {
             var val = $(e.target).val().trim(),
                 parsedDate = val ? this._parseInputDate(val) : null;
-            this._setValue(parsedDate);
+            this._setValue(parsedDate, this._getLastPickedDateIndex());
             e.stopImmediatePropagation();
             return false;
         };
@@ -526,7 +526,7 @@ var DateTimePicker = function ($, moment) {
         };
 
         DateTimePicker.prototype._notifyEvent = function _notifyEvent(e) {
-            if (e.type === DateTimePicker.Event.CHANGE && (e.date && e.date.isSame(e.oldDate)) || !e.date && !e.oldDate) {
+            if (e.type === DateTimePicker.Event.CHANGE && e.date && e.date.isSame(e.oldDate) || !e.date && !e.oldDate) {
                 return;
             }
             this._element.trigger(e);
@@ -741,7 +741,7 @@ var DateTimePicker = function ($, moment) {
         };
 
         DateTimePicker.prototype._getLastPickedDate = function _getLastPickedDate() {
-            return this._dates[this._getLastPickedDateIndex()];
+            return this._dates[this._getLastPickedDateIndex()] || this.getMoment();
         };
 
         DateTimePicker.prototype._getLastPickedDateIndex = function _getLastPickedDateIndex() {

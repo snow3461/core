@@ -502,7 +502,7 @@ const DateTimePicker = (($, moment) => {
         _change(e) {
             const val = $(e.target).val().trim(),
                 parsedDate = val ? this._parseInputDate(val) : null;
-            this._setValue(parsedDate);
+            this._setValue(parsedDate, this._getLastPickedDateIndex());
             e.stopImmediatePropagation();
             return false;
         }
@@ -783,7 +783,7 @@ const DateTimePicker = (($, moment) => {
         }
 
         _getLastPickedDate() {
-            return this._dates[this._getLastPickedDateIndex()];
+            return this._dates[this._getLastPickedDateIndex()] || this.getMoment();
         }
 
         _getLastPickedDateIndex() {
