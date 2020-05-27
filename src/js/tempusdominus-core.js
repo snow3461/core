@@ -423,6 +423,8 @@ const DateTimePicker = (($, moment) => {
                     this.unset = true;
                     this._dates = [];
                     this._datesFormatted = [];
+                    this._dates[0] = this.getMoment();
+                    this._viewDate = this.getMoment().clone();
                 } else {
                     outpValue = `${this._element.data('date')},`;
                     outpValue = outpValue.replace(`${oldDate.format(this.actualFormat)},`, '').replace(',,', '').replace(/,\s*$/, '');
